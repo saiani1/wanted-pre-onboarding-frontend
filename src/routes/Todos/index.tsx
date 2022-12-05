@@ -1,7 +1,13 @@
-import styles from "./todos.module.scss";
+import Todo from '../../components/Todo';
+import styles from './todos.module.scss';
 
 const Todos = () => {
-  return <p>이예에</p>;
+  return (
+    <div className={styles.wrap}>
+      <h1>Todo List</h1>
+      <Todo />
+    </div>
+  );
 };
 
 export default Todos;

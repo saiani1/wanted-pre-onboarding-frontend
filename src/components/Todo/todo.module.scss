@@ -1,0 +1,43 @@
+.wrap {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+
+  .left {
+    display: flex;
+    column-gap: 10px;
+
+    .inputWrap {
+      position: relative;
+
+      input {
+        -webkit-appearance: none;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #aaa;
+        border-radius: 50%;
+
+        &:checked {
+          background-color: #aaa;
+        }
+      }
+
+      .icon {
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        width: 11px;
+        pointer-events: none;
+        fill: #ffffff;
+      }
+    }
+  }
+
+  .btnWrap {
+    .icon {
+      width: 10px;
+      fill: #aaaaaa;
+    }
+  }
+}
