@@ -1,12 +1,14 @@
 .wrap {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 10px;
+  padding: 10px 0;
 
   .left {
     display: flex;
     column-gap: 10px;
+    align-items: center;
 
     .inputWrap {
       position: relative;
@@ -15,8 +17,10 @@
         -webkit-appearance: none;
         width: 20px;
         height: 20px;
-        border: 2px solid #aaa;
+        margin-top: 2px;
+        border: 2.5px solid #aaa;
         border-radius: 50%;
+        transition: all 0.2s;
 
         &:checked {
           background-color: #aaa;
@@ -25,19 +29,32 @@
 
       .icon {
         position: absolute;
-        top: 4px;
+        top: 6px;
         left: 4px;
         width: 11px;
         pointer-events: none;
-        fill: #ffffff;
+        fill: #fff;
       }
     }
   }
 
   .btnWrap {
-    .icon {
-      width: 10px;
-      fill: #aaaaaa;
+    display: flex;
+    column-gap: 5px;
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      background-color: #aaa;
+      border-radius: 3px;
+
+      .icon {
+        width: 12px;
+        fill: #fff;
+      }
     }
   }
 }

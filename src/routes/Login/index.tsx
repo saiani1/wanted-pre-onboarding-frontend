@@ -3,11 +3,16 @@ import cx from 'classnames';
 import styles from './login.module.scss';
 
 const Login = () => {
+  const [activeTab, setActiveTab] = useState('login');
   const [enteredEmail, setEnteredEmail] = useState('');
   const [enteredPassword, setEnteredPassword] = useState('');
   const [validEmail, setValidEmail] = useState(false);
   const [validPassword, setValidPassword] = useState(false);
   const [validForm, setValidForm] = useState(false);
+
+  const tabClickHandler = (e: any) => {
+    setActiveTab(e.target.name);
+  };
 
   const enteredInputHandler = (e: any) => {
     const { value } = e.target;
@@ -34,7 +39,27 @@ const Login = () => {
 
   return (
     <form className={styles.wrap}>
-      <h1>Log In</h1>
+      <div className={styles.tabWrap}>
+        <button
+          type='button'
+          name='login'
+          className={cx({ [styles.active]: activeTab === 'login' })}
+          onClick={tabClickHandler}
+        >
+          Log In
+        </button>
+        <button
+          type='button'
+          name='signup'
+          className={cx(styles.signupBtn, {
+            [styles.active]: activeTab === 'signup',
+          })}
+          onClick={tabClickHandler}
+        >
+          Sign Up
+        </button>
+        <div className={styles.bar} />
+      </div>
       <div className={styles.inputWrap}>
         <label htmlFor='email'>E-mail</label>
         <input
@@ -55,7 +80,7 @@ const Login = () => {
       </div>
       <button
         type='submit'
-        className={cx(styles.button, { [styles.active]: validForm })}
+        className={cx(styles.submitBtn, { [styles.active]: validForm })}
         disabled={!validForm}
       >
         SUBMIT

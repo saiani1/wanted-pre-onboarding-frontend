@@ -1,27 +1,56 @@
 .wrap {
+  position: relative;
   display: flex;
   flex-direction: column;
-  row-gap: 20px;
+  row-gap: 10px;
   width: 100%;
 
-  h1 {
+  .tabWrap {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 40px;
     margin-bottom: 20px;
-    font-size: 30px;
-    font-weight: 600;
-    color: #555555;
-    text-align: center;
+    border-radius: 20px;
+    background-color: #ddd;
+
+    button {
+      width: 50%;
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      z-index: 1;
+
+      &.active {
+        &.signupBtn~.bar {
+          margin-left: 117px;
+        }
+      }
+    }
+
+    .bar {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      width: 47%;
+      height: 30px;
+      border-radius: 15px;
+      background-color: pink;
+      transition: all 0.2s;
+    }
   }
 
   label {
     display: block;
+    font-size: 13px;
     margin-bottom: 5px;
-    color: #888888;
+    color: #888;
   }
 
   input {
     width: 100%;
     padding: 5px;
-    border: 1px solid #aaaaaa;
+    border: 1px solid #aaa;
     border-radius: 3px;
   }
 
@@ -30,17 +59,18 @@
     flex-direction: column;
   }
 
-  .button {
+  .submitBtn {
     width: 100%;
     padding: 10px;
-    margin-top: 10px;
+    margin-top: 20px;
     font-weight: 600;
-    color: #ffffff;
+    color: #fff;
     background-color: #bbb;
     border-radius: 5px;
+
+    &.active {
+      background-color: pink;
+    }
   }
 
-  .active {
-    background-color: pink;
-  }
 }

@@ -177,3 +177,8 @@ textarea {
   font-family: 'Noto Sans', sans-serif, Arial, PingFangSC-Regular, 'Microsoft YaHei';
   font-feature-settings: 'tnum';
 }
+
+/* stylelint-disable-next-line no-duplicate-selectors */
+body {
+  -ms-overflow-style: none;
+}

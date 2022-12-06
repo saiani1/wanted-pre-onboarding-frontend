@@ -3,7 +3,7 @@ import styles from './todo.module.scss';
 
 const Todo = () => {
   return (
-    <div className={styles.wrap}>
+    <li className={styles.wrap}>
       <div className={styles.left}>
         <div className={styles.inputWrap}>
           <input type='checkbox' />
@@ -19,7 +19,7 @@ const Todo = () => {
           <DeleteBtn className={styles.icon} />
         </button>
       </div>
-    </div>
+    </li>
   );
 };
 
