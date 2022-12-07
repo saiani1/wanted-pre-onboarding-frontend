@@ -1,14 +1,13 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
 
-import { updateTodo, deleteTodo } from '../../services/todo';
 import styles from './todo.module.scss';
+import { updateTodo, deleteTodo } from '../../services/todo';
 import { CheckBtn, EditBtn, DeleteBtn, CloseBtn } from '../../assets/svg/index';
 
 const Todo = ({ data, setIsChange }) => {
   const { id, isCompleted, todo } = data;
   const [updateMode, setUpdateMode] = useState(false);
-  const [isComplete, setIsComplete] = useState(false);
   const [enteredEditTodo, setEnteredEditTodo] = useState('');
   const token = localStorage.getItem('token');
 
@@ -16,16 +15,31 @@ const Todo = ({ data, setIsChange }) => {
     setEnteredEditTodo(e.target.value);
   };
 
-  const completeChangeHandler = () => {
-    setIsComplete(prev => !prev);
+  const completeChangeHandler = e => {
+    const check = e.target.checked;
+    updateTodo(id, todo, check, token).catch(err => console.log(err));
   };
 
   const editBtnClickHandler = () => {
+    setUpdateMode(true);
+
     if (updateMode && enteredEditTodo) {
-      setIsChange(true);
-      updateTodo(id, enteredEditTodo, isCompleted, token);
+      updateTodo(id, enteredEditTodo, isCompleted, token)
+        .then(() => {
+          setIsChange(true);
+          setUpdateMode(false);
+        })
+        .catch(err => console.log(err));
     }
-    setUpdateMode(prev => !prev);
+  };
+
+  const deleteBtnClickHandler = () => {
+    if (updateMode) setUpdateMode(false);
+    else {
+      deleteTodo(id, token)
+        .then(() => setIsChange(true))
+        .catch(err => console.log(err));
+    }
   };
 
   return (
@@ -42,8 +56,8 @@ const Todo = ({ data, setIsChange }) => {
         {updateMode ? (
           <input
             type='text'
+            defaultValue={todo}
             onChange={editTodoChangeHandler}
-            placeholder={todo}
           />
         ) : (
           <p>{todo}</p>
@@ -57,7 +71,7 @@ const Todo = ({ data, setIsChange }) => {
             <EditBtn className={styles.icon} />
           )}
         </button>
-        <button type='button'>
+        <button type='button' onClick={deleteBtnClickHandler}>
           {updateMode ? (
             <CloseBtn className={styles.icon} />
           ) : (

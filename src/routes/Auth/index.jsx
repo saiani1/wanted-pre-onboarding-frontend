@@ -22,7 +22,9 @@ const Auth = () => {
 
   useEffect(() => {
     if (authCtx.isLogin) navigate('/todo');
-  });
+    if (validEmail && validPassword) setValidForm(true);
+    else setValidForm(false);
+  }, [validEmail, validPassword]);
 
   const tabClickHandler = e => {
     setClickedTab(e.currentTarget.name);
@@ -46,7 +48,7 @@ const Auth = () => {
     if (type === 'password') {
       setEnteredPassword(value);
 
-      if (value.length > 7) {
+      if (value.length >= 8) {
         setValidPassword(true);
         setPasswordError('');
       } else {
@@ -54,11 +56,6 @@ const Auth = () => {
         setPasswordError('비밀번호는 8자 이상 적어주세요.');
       }
     }
-
-    if (validEmail && validPassword) setValidForm(true);
-    else setValidForm(false);
-
-    console.log(value, validEmail, validPassword, validForm);
   };
 
   const submitHandler = e => {

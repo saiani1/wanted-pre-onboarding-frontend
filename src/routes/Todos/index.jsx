@@ -2,9 +2,9 @@ import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import styles from './todos.module.scss';
-import { createTodo, getTodos } from '../../services/todo';
 import AuthContext from '../../store/auth-context';
 import Todo from '../../components/Todo';
+import { createTodo, getTodos } from '../../services/todo';
 import { AddBtn } from '../../assets/svg/index';
 
 const Todos = () => {
@@ -30,7 +30,10 @@ const Todos = () => {
 
     if (enteredTodo) {
       createTodo(enteredTodo, token)
-        .then(() => setIsChange(true))
+        .then(() => {
+          setIsChange(true);
+          setEnteredTodo('');
+        })
         .catch(err => console.log(err));
     }
   };

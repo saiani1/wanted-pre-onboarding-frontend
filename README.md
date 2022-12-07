@@ -1,6 +1,12 @@
 # wanted-pre-onboarding-frontend
 
+# 프로젝트의 실행 방법
+```
+$ npm install
+$ npm run start
+```
 
-프로젝트의 실행 방법
-데모 영상
-데모 영상은 배포 링크로 대체 가능하며, 배포 시 가산점이 부여됩니다.
+# 배포링크
+
+# 구현기능
+모든 요구사항 구현 완료
