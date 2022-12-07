@@ -7,7 +7,7 @@ $ npm run start
 ```
 
 ### 2. 배포링크
-https://wanted-pre-onboarding-saiani.netlify.app
+https://wanted-pre-onboarding-frontend-pi.vercel.app/
 
 ### 3. 구현기능
 모든 요구사항 구현 완료
