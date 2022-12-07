@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 
-import Login from './Login/index';
+import Auth from './Auth/index';
 import Todos from './Todos/index';
 
 import styles from './routes.module.scss';
@@ -10,7 +10,7 @@ const App = () => {
     <div className={styles.wrap}>
       <div className={styles.appWrap}>
         <Routes>
-          <Route path='/' element={<Login />} />
+          <Route path='/' element={<Auth />} />
           <Route path='todo' element={<Todos />} />
         </Routes>
       </div>
