@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import cx from 'classnames';
 
@@ -7,8 +7,8 @@ import AuthContext from '../../store/auth-context';
 import { signup, signin } from '../../services/auth';
 
 const Auth = () => {
-  const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const [clickedTab, setClickedTab] = useState('signin');
   const [enteredEmail, setEnteredEmail] = useState('');
@@ -19,6 +19,10 @@ const Auth = () => {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [submitError, setSubmitError] = useState('');
+
+  useEffect(() => {
+    if (authCtx.isLogin) navigate('/todo');
+  });
 
   const tabClickHandler = e => {
     setClickedTab(e.currentTarget.name);
@@ -60,26 +64,27 @@ const Auth = () => {
   const submitHandler = e => {
     e.preventDefault();
 
-    if (clickedTab === 'signin') {
-      signin(enteredEmail, enteredPassword)
-        .then(res => {
-          authCtx.login(JSON.stringify(res.data.access_token));
-          navigate('/todo');
-        })
-        .catch(err => {
-          setSubmitError(err.response.data.message);
-        });
-    }
+    if (validForm) {
+      if (clickedTab === 'signin') {
+        signin(enteredEmail, enteredPassword)
+          .then(res => {
+            authCtx.login(JSON.stringify(res.data.access_token));
+          })
+          .catch(err => {
+            setSubmitError(err.response.data.message);
+          });
+      }
 
-    if (clickedTab === 'signup') {
-      signup(enteredEmail, enteredPassword)
-        .then(res => {
-          setClickedTab('signin');
-          setSubmitError('회원가입이 완료되었습니다. 로그인해주세요.');
-        })
-        .catch(err => {
-          setSubmitError(err.response.data.message);
-        });
+      if (clickedTab === 'signup') {
+        signup(enteredEmail, enteredPassword)
+          .then(() => {
+            setClickedTab('signin');
+            setSubmitError('회원가입이 완료되었습니다. 로그인해주세요.');
+          })
+          .catch(err => {
+            setSubmitError(err.response.data.message);
+          });
+      }
     }
   };
 

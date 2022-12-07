@@ -36,6 +36,16 @@
         fill: #fff;
       }
     }
+
+    p {
+      color: #444;
+    }
+
+    input[type='text'] {
+      padding: 2px;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+    }
   }
 
   .btnWrap {

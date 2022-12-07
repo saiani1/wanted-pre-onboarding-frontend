@@ -2,6 +2,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-no-constructed-context-values */
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const AuthContext = React.createContext({
   token: '',
@@ -10,15 +11,16 @@ const AuthContext = React.createContext({
 });
 
 export const AuthContextProvider = props => {
+  const navigate = useNavigate();
   const tokenData = localStorage.getItem('token');
-
   const [authToken, setAuthToken] = useState(tokenData);
-
   const userIsLogIn = !!authToken;
 
   const handleLogin = token => {
+    const stringToken = JSON.parse(token);
     setAuthToken(token);
-    localStorage.setItem('token', token);
+    localStorage.setItem('token', `bearer ${stringToken}`);
+    navigate('/todo');
   };
 
   const contextValue = {
